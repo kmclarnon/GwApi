@@ -9,6 +9,7 @@ import com.hubspot.rosetta.Rosetta;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 import nk.smashdb.service.daos.LowerCaseWithUnderscoresModule;
+import nk.smashdb.service.daos.UsersDao;
 
 public class SmashDBServiceModule extends AbstractModule {
 
@@ -21,5 +22,10 @@ public class SmashDBServiceModule extends AbstractModule {
   public DBI providesDbi(Environment environment, SmashDBConfiguration configuration) {
     DBIFactory dbiFactory = new DBIFactory();
     return dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
+  }
+
+  @Provides
+  public UsersDao providesUsersDao(DBI dbi) {
+    return dbi.onDemand(UsersDao.class);
   }
 }

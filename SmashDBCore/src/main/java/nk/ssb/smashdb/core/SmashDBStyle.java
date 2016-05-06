@@ -1,4 +1,4 @@
-package nk.smashdb.core;
+package nk.ssb.smashdb.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

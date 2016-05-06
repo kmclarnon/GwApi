@@ -1,4 +1,4 @@
-package nk.smashdb.core;
+package nk.ssb.smashdb.core;
 
 public interface UserFields {
   String getEmail();

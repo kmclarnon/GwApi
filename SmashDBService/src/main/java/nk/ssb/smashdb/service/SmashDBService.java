@@ -1,4 +1,4 @@
-package nk.smashdb.service;
+package nk.ssb.smashdb.service;
 
 import com.hubspot.dropwizard.guice.GuiceBundle;
 

@@ -1,4 +1,4 @@
-package nk.smashdb.service;
+package nk.ssb.smashdb.service;
 
 import org.skife.jdbi.v2.DBI;
 
@@ -8,8 +8,8 @@ import com.hubspot.rosetta.Rosetta;
 
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
-import nk.smashdb.service.daos.LowerCaseWithUnderscoresModule;
-import nk.smashdb.service.daos.UsersDao;
+import nk.ssb.smashdb.service.daos.LowerCaseWithUnderscoresModule;
+import nk.ssb.smashdb.service.daos.UsersDao;
 
 public class SmashDBServiceModule extends AbstractModule {
 

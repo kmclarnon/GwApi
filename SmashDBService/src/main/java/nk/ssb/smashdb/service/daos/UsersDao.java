@@ -1,4 +1,4 @@
-package nk.smashdb.service.daos;
+package nk.ssb.smashdb.service.daos;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 
 import com.hubspot.rosetta.jdbi.RosettaMapperFactory;
 
-import nk.smashdb.core.User;
-import nk.smashdb.core.UserEgg;
+import nk.ssb.smashdb.core.User;
+import nk.ssb.smashdb.core.UserEgg;
 
 @RegisterMapperFactory(RosettaMapperFactory.class)
 public interface UsersDao {

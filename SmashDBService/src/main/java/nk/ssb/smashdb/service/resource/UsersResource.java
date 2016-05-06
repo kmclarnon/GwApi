@@ -1,4 +1,4 @@
-package nk.smashdb.service.resource;
+package nk.ssb.smashdb.service.resource;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.inject.Inject;
 
-import nk.smashdb.core.User;
-import nk.smashdb.core.UserEgg;
-import nk.smashdb.service.daos.UsersDao;
+import nk.ssb.smashdb.core.User;
+import nk.ssb.smashdb.core.UserEgg;
+import nk.ssb.smashdb.service.daos.UsersDao;
 
 @Path("users")
 @Produces(MediaType.APPLICATION_JSON)

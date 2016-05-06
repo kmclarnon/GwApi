@@ -1,4 +1,4 @@
-package nk.smashdb.service.daos;
+package nk.ssb.smashdb.service.daos;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

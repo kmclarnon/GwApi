@@ -3,6 +3,8 @@ package nk.smashdb.service;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 
 import io.dropwizard.Application;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
@@ -23,7 +25,15 @@ public class SmashDBService extends Application<SmashDBConfiguration> {
         .setConfigClass(SmashDBConfiguration.class)
         .build();
 
+    MigrationsBundle<SmashDBConfiguration> migrationsBundle = new MigrationsBundle<SmashDBConfiguration>() {
+      @Override
+      public DataSourceFactory getDataSourceFactory(SmashDBConfiguration configuration) {
+        return configuration.getDataSourceFactory();
+      }
+    };
+
     bootstrap.addBundle(guiceBundle);
+    bootstrap.addBundle(migrationsBundle);
   }
 
   @Override

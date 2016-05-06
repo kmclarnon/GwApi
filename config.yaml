@@ -6,10 +6,10 @@ server:
     port: 8080
 
 database:
-  driverClass: org.postgresql.Driver
-  user: pg-user
-  password: iAMs00perSecrEET
-  url: jdbc:mysql://localhost:3306/smashdb
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  password:
+  url: jdbc:mysql://localhost:3306/Smash
   properties:
     charSet: UTF-8
   maxWaitForConnection: 1s

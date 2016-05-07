@@ -11,19 +11,23 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import com.google.inject.Inject;
 
-import nk.ssb.smashdb.core.SignupRequest;
+import nk.ssb.smashdb.core.requests.LoginRequest;
+import nk.ssb.smashdb.core.requests.SignupRequest;
+import nk.ssb.smashdb.core.users.User;
 import nk.ssb.smashdb.core.users.UserEgg;
 import nk.ssb.smashdb.service.auth.CookieResponseGenerator;
 import nk.ssb.smashdb.service.auth.PasswordHasher;
 import nk.ssb.smashdb.service.daos.UsersDao;
 import nk.ssb.smashdb.service.exceptions.EmailUnavailableException;
+import nk.ssb.smashdb.service.exceptions.InvalidPasswordException;
+import nk.ssb.smashdb.service.exceptions.InvalidUserException;
 import nk.ssb.smashdb.service.exceptions.MismatchPasswordException;
 import nk.ssb.smashdb.service.exceptions.UsernameUnavailableException;
 
-@Path("signup")
+@Path("auth")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class SignupResource {
+public class AuthResource {
 
   private static final int SALT_LENGTH = 10;
   private static final int INITIAL_ELO = 1000;
@@ -33,7 +37,7 @@ public class SignupResource {
   private final UsersDao usersDao;
 
   @Inject
-  public SignupResource(CookieResponseGenerator cookieResponseGenerator,
+  public AuthResource(CookieResponseGenerator cookieResponseGenerator,
                         PasswordHasher passwordHasher,
                         UsersDao usersDao) {
     this.cookieResponseGenerator = cookieResponseGenerator;
@@ -42,6 +46,7 @@ public class SignupResource {
   }
 
   @POST
+  @Path("signup")
   public Response signup(SignupRequest signupRequest) {
     validateSignup(signupRequest);
     String passwordSalt = RandomStringUtils.randomAlphabetic(SALT_LENGTH);
@@ -54,6 +59,23 @@ public class SignupResource {
         .setCreatedAt(System.currentTimeMillis())
         .build());
     return cookieResponseGenerator.responseWithCookie(Response.ok().build(), userId);
+  }
+
+  @POST
+  @Path("login")
+  public Response login(LoginRequest loginRequest) {
+    User user = usersDao.getUserByUsername(loginRequest.getEmail()).orElseThrow(InvalidUserException::new);
+    String requestPasswordHash = passwordHasher.hash(loginRequest.getPassword(), user.getPasswordHash());
+    if (!requestPasswordHash.equals(user.getPasswordHash())) {
+      throw new InvalidPasswordException();
+    }
+    return cookieResponseGenerator.responseWithCookie(Response.ok().build(), user.getId());
+  }
+
+  @POST
+  @Path("logout")
+  public Response logout() {
+    return cookieResponseGenerator.responseErasingCookie(Response.ok().build());
   }
 
   private void validateSignup(SignupRequest signupRequest) {

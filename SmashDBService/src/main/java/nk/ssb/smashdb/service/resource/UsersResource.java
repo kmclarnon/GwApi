@@ -11,8 +11,8 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.inject.Inject;
 
-import nk.ssb.smashdb.core.User;
-import nk.ssb.smashdb.core.UserEgg;
+import nk.ssb.smashdb.core.users.User;
+import nk.ssb.smashdb.core.users.UserEgg;
 import nk.ssb.smashdb.service.daos.UsersDao;
 
 @Path("users")

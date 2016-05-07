@@ -9,6 +9,7 @@ import com.hubspot.rosetta.Rosetta;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
 import nk.ssb.smashdb.service.daos.LowerCaseWithUnderscoresModule;
+import nk.ssb.smashdb.service.daos.SecretsDao;
 import nk.ssb.smashdb.service.daos.UsersDao;
 
 public class SmashDBServiceModule extends AbstractModule {
@@ -27,5 +28,10 @@ public class SmashDBServiceModule extends AbstractModule {
   @Provides
   public UsersDao providesUsersDao(DBI dbi) {
     return dbi.onDemand(UsersDao.class);
+  }
+
+  @Provides
+  public SecretsDao providesSecretsDao(DBI dbi) {
+    return dbi.onDemand(SecretsDao.class);
   }
 }

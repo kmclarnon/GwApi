@@ -6,12 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 import com.google.common.base.Throwables;
-import com.google.inject.Singleton;
 
-@Singleton
 public class PasswordHasher {
 
-  public String hash(String password, String salt) {
+  public static String hash(String password, String salt) {
     try {
       String payload = password + salt;
       MessageDigest digest = MessageDigest.getInstance("SHA-256");

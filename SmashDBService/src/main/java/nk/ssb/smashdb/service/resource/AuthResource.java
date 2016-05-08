@@ -32,15 +32,12 @@ public class AuthResource {
   private static final int INITIAL_ELO = 1000;
 
   private final CookieResponseGenerator cookieResponseGenerator;
-  private final PasswordHasher passwordHasher;
   private final UsersDao usersDao;
 
   @Inject
   public AuthResource(CookieResponseGenerator cookieResponseGenerator,
-                        PasswordHasher passwordHasher,
                         UsersDao usersDao) {
     this.cookieResponseGenerator = cookieResponseGenerator;
-    this.passwordHasher = passwordHasher;
     this.usersDao = usersDao;
   }
 
@@ -49,7 +46,7 @@ public class AuthResource {
   public Response signup(SignupRequest signupRequest) {
     validateSignup(signupRequest);
     String passwordSalt = RandomStringUtils.randomAlphabetic(SALT_LENGTH);
-    String passwordHash = passwordHasher.hash(signupRequest.getPassword(), passwordSalt);
+    String passwordHash = PasswordHasher.hash(signupRequest.getPassword(), passwordSalt);
     int userId = usersDao.insert(UserEgg.builder()
         .setEmail(signupRequest.getEmail())
         .setUsername(signupRequest.getUsername())
@@ -65,7 +62,7 @@ public class AuthResource {
   @Path("login")
   public Response login(LoginRequest loginRequest) {
     User user = usersDao.getUserByEmail(loginRequest.getEmail()).orElseThrow(InvalidUserPasswordException::new);
-    String requestPasswordHash = passwordHasher.hash(loginRequest.getPassword(), user.getPasswordSalt());
+    String requestPasswordHash = PasswordHasher.hash(loginRequest.getPassword(), user.getPasswordSalt());
     if (!requestPasswordHash.equals(user.getPasswordHash())) {
       throw new InvalidUserPasswordException();
     }

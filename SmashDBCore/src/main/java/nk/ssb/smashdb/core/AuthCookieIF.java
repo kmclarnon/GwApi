@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Value.Immutable
 public interface AuthCookieIF {
   @JsonProperty("u")
-  public int getUserId();
+  int getUserId();
   @JsonProperty("a")
-  public long getAuthenticatedAt();
+  long getAuthenticatedAt();
 }

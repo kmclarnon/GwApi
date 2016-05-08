@@ -10,6 +10,7 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.sqlobject.customizers.SingleValueResult;
 
+import com.hubspot.rosetta.jdbi.BindWithRosetta;
 import com.hubspot.rosetta.jdbi.RosettaMapperFactory;
 
 import nk.ssb.smashdb.core.users.User;
@@ -21,8 +22,12 @@ public interface UsersDao {
   List<User> getAllUsers();
 
   @GetGeneratedKeys
-  @SqlUpdate("INSERT INTO users SET email=:email, password_hash=:password_hash, elo=:elo, created_at=:created_at")
-  int insert(UserEgg userEgg);
+  @SqlUpdate("INSERT INTO users SET email=:email, username=:username, password_hash=:password_hash, password_salt=:password_salt, elo=:elo, created_at=:created_at")
+  int insert(@BindWithRosetta UserEgg userEgg);
+
+  @SingleValueResult
+  @SqlQuery("SELECT * FROM users WHERE id=:id")
+  Optional<User> getUserById(@Bind("id") int email);
 
   @SingleValueResult
   @SqlQuery("SELECT * FROM users WHERE email=:email")

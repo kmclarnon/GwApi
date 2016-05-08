@@ -6,12 +6,12 @@ import javax.ws.rs.core.Response.Status;
 
 import nk.ssb.smashdb.core.ExceptionEntity;
 
-public class UsernameUnavailableException extends WebApplicationException {
+public class InvalidUserPasswordException extends WebApplicationException {
 
-  private final static String CODE = "USERNAME_UNAVAILABLE";
+  private final static String CODE = "INVALID_USER_PASSWORD";
 
-  public UsernameUnavailableException() {
-    super(Response.status(Status.BAD_REQUEST)
+  public InvalidUserPasswordException() {
+    super(Response.status(Status.UNAUTHORIZED)
         .entity(ExceptionEntity.builder()
             .setCode(CODE)
             .build())

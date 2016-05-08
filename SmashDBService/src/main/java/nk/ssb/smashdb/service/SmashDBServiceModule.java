@@ -8,7 +8,9 @@ import com.hubspot.rosetta.Rosetta;
 
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
+import nk.ssb.smashdb.service.auth.AuthModule;
 import nk.ssb.smashdb.service.daos.LowerCaseWithUnderscoresModule;
+import nk.ssb.smashdb.service.daos.OptionalContainerFactory;
 import nk.ssb.smashdb.service.daos.SecretsDao;
 import nk.ssb.smashdb.service.daos.UsersDao;
 
@@ -17,12 +19,15 @@ public class SmashDBServiceModule extends AbstractModule {
   @Override
   public void configure() {
     Rosetta.addModule(new LowerCaseWithUnderscoresModule());
+    install(new AuthModule());
   }
 
   @Provides
   public DBI providesDbi(Environment environment, SmashDBConfiguration configuration) {
     DBIFactory dbiFactory = new DBIFactory();
-    return dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
+    DBI dbi = dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
+    dbi.registerContainerFactory(new OptionalContainerFactory());
+    return dbi;
   }
 
   @Provides

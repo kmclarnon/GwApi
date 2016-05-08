@@ -20,7 +20,7 @@ public class SecretsConfig {
 
   @Inject
   public SecretsConfig(SecretsDao secretsDao) {
-    this.secrets = secretsDao.getSecrets();
+    this.secrets = secretsDao.getSecrets().get(0);
   }
 
   public Key getCookieKey() {

@@ -3,6 +3,7 @@ package nk.ssb.smashdb.service.auth;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import com.google.common.base.Throwables;
 import com.google.inject.Singleton;
@@ -14,7 +15,7 @@ public class PasswordHasher {
     try {
       String payload = password + salt;
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
-      return new String(digest.digest(payload.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+      return Base64.getUrlEncoder().encodeToString(digest.digest(payload.getBytes(StandardCharsets.UTF_8)));
     } catch (NoSuchAlgorithmException e) {
       throw Throwables.propagate(e);
     }

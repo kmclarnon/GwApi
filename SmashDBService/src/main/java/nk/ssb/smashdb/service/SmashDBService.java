@@ -7,10 +7,13 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import nk.ssb.smashdb.service.auth.AuthFilter;
+import nk.ssb.smashdb.service.auth.CaptureInjectorModule;
 
 public class SmashDBService extends Application<SmashDBConfiguration> {
 
   public static final String SERVICE_NAME = "SmashDB Service";
+  private CaptureInjectorModule captureInjectorModule = new CaptureInjectorModule();
 
   public static void main(String[] args) throws Exception {
     new SmashDBService().run(args);
@@ -18,8 +21,8 @@ public class SmashDBService extends Application<SmashDBConfiguration> {
 
   @Override
   public void initialize(Bootstrap<SmashDBConfiguration> bootstrap) {
-
     GuiceBundle<SmashDBConfiguration> guiceBundle = GuiceBundle.<SmashDBConfiguration>newBuilder()
+        .addModule(captureInjectorModule)
         .addModule(new SmashDBServiceModule())
         .enableAutoConfig(getClass().getPackage().getName())
         .setConfigClass(SmashDBConfiguration.class)
@@ -43,6 +46,6 @@ public class SmashDBService extends Application<SmashDBConfiguration> {
 
   @Override
   public void run(SmashDBConfiguration configuration, Environment environment) throws Exception {
-
+    environment.jersey().register(new AuthFilter(captureInjectorModule));
   }
 }

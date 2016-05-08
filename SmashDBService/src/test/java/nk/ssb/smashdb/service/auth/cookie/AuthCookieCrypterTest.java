@@ -1,4 +1,4 @@
-package nk.ssb.smashdb.service.auth;
+package nk.ssb.smashdb.service.auth.cookie;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -13,10 +13,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nk.ssb.smashdb.core.AuthCookie;
+import nk.ssb.smashdb.service.auth.SecretsConfig;
 
 public class AuthCookieCrypterTest {
 
-  private static final String TEST_KEY = RandomStringUtils.randomAlphabetic(32);
+  private static final String TEST_KEY = RandomStringUtils.randomAlphanumeric(32);
   private static final int USER_ID = 1;
   private static final long AUTHENTICTED_AT = 100L;
 
@@ -25,6 +26,7 @@ public class AuthCookieCrypterTest {
 
   @Before
   public void setup() {
+    System.out.println(TEST_KEY);
     secretsConfig = mock(SecretsConfig.class);
     when(secretsConfig.getCookieKey()).thenReturn(new SecretKeySpec(TEST_KEY.getBytes(StandardCharsets.UTF_8),
         SecretsConfig.COOKIE_CRYPT_ALGORITHM));
@@ -43,5 +45,7 @@ public class AuthCookieCrypterTest {
 
     assertEquals(originalAuthCookie.getUserId(), decryptedCookie.getUserId());
     assertEquals(originalAuthCookie.getAuthenticatedAt(), decryptedCookie.getAuthenticatedAt());
+
+    System.out.println(encryptedCookie);
   }
 }

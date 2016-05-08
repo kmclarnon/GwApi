@@ -35,6 +35,9 @@
   </changeSet>
   <changeSet id="create secrets table" author="nrattner">
     <createTable tableName="secrets">
+      <column name="id" autoIncrement="true" type="INT">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
       <column name="cookie_key" type="CHAR(32)">
         <constraints nullable="false"/>
       </column>

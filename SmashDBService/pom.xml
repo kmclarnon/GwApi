@@ -50,6 +50,11 @@
       <version>${smash.dropwizard.version}</version>
     </dependency>
     <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-auth</artifactId>
+      <version>${smash.dropwizard.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.hubspot.rosetta</groupId>
       <artifactId>RosettaJdbi</artifactId>
       <version>${smash.rosetta.jdbi.version}</version>

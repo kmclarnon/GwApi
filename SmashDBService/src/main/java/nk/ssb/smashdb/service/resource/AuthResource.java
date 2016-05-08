@@ -15,12 +15,11 @@ import nk.ssb.smashdb.core.requests.LoginRequest;
 import nk.ssb.smashdb.core.requests.SignupRequest;
 import nk.ssb.smashdb.core.users.User;
 import nk.ssb.smashdb.core.users.UserEgg;
-import nk.ssb.smashdb.service.auth.CookieResponseGenerator;
+import nk.ssb.smashdb.service.auth.cookie.CookieResponseGenerator;
 import nk.ssb.smashdb.service.auth.PasswordHasher;
 import nk.ssb.smashdb.service.daos.UsersDao;
 import nk.ssb.smashdb.service.exceptions.EmailUnavailableException;
-import nk.ssb.smashdb.service.exceptions.InvalidPasswordException;
-import nk.ssb.smashdb.service.exceptions.InvalidUserException;
+import nk.ssb.smashdb.service.exceptions.InvalidUserPasswordException;
 import nk.ssb.smashdb.service.exceptions.MismatchPasswordException;
 import nk.ssb.smashdb.service.exceptions.UsernameUnavailableException;
 
@@ -53,6 +52,7 @@ public class AuthResource {
     String passwordHash = passwordHasher.hash(signupRequest.getPassword(), passwordSalt);
     int userId = usersDao.insert(UserEgg.builder()
         .setEmail(signupRequest.getEmail())
+        .setUsername(signupRequest.getUsername())
         .setPasswordHash(passwordHash)
         .setPasswordSalt(passwordSalt)
         .setElo(INITIAL_ELO)
@@ -64,10 +64,10 @@ public class AuthResource {
   @POST
   @Path("login")
   public Response login(LoginRequest loginRequest) {
-    User user = usersDao.getUserByUsername(loginRequest.getEmail()).orElseThrow(InvalidUserException::new);
-    String requestPasswordHash = passwordHasher.hash(loginRequest.getPassword(), user.getPasswordHash());
+    User user = usersDao.getUserByEmail(loginRequest.getEmail()).orElseThrow(InvalidUserPasswordException::new);
+    String requestPasswordHash = passwordHasher.hash(loginRequest.getPassword(), user.getPasswordSalt());
     if (!requestPasswordHash.equals(user.getPasswordHash())) {
-      throw new InvalidPasswordException();
+      throw new InvalidUserPasswordException();
     }
     return cookieResponseGenerator.responseWithCookie(Response.ok().build(), user.getId());
   }

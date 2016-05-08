@@ -1,4 +1,4 @@
-package nk.ssb.smashdb.service.auth;
+package nk.ssb.smashdb.service.auth.cookie;
 
 import java.util.Base64;
 
@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import nk.ssb.smashdb.core.AuthCookie;
+import nk.ssb.smashdb.service.auth.SecretsConfig;
 
 @Singleton
 public class AuthCookieCrypter {

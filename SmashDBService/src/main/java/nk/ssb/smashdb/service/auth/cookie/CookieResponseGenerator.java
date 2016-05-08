@@ -1,4 +1,4 @@
-package nk.ssb.smashdb.service.auth;
+package nk.ssb.smashdb.service.auth.cookie;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,8 +12,8 @@ import nk.ssb.smashdb.core.AuthCookie;
 
 public class CookieResponseGenerator {
 
-  private static final String COOKIE_NAME = "gwauth";
-  private static final String COOKIE_DOMAIN = "gameandwatch.af";
+  public static final String COOKIE_NAME = "gwauth";
+  private static final String COOKIE_DOMAIN = "gameandwatching.us";
   private static final int COOKIE_AGE = (int) TimeUnit.DAYS.toMillis(365);
 
   private final AuthCookieCrypter authCookieCrypter;
@@ -42,6 +42,4 @@ public class CookieResponseGenerator {
         .build());
     return new NewCookie(COOKIE_NAME, cookiePayload, "/", COOKIE_DOMAIN, "", COOKIE_AGE, false);
   }
-
-
 }

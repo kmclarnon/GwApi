@@ -7,10 +7,10 @@ import com.google.inject.Provides;
 import com.hubspot.rosetta.Rosetta;
 
 import io.dropwizard.jdbi.DBIFactory;
+import io.dropwizard.jdbi.OptionalContainerFactory;
 import io.dropwizard.setup.Environment;
 import nk.ssb.smashdb.service.auth.AuthModule;
 import nk.ssb.smashdb.service.daos.LowerCaseWithUnderscoresModule;
-import nk.ssb.smashdb.service.daos.OptionalContainerFactory;
 import nk.ssb.smashdb.service.daos.SecretsDao;
 import nk.ssb.smashdb.service.daos.UsersDao;
 

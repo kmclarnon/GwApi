@@ -17,7 +17,7 @@ import nk.ssb.smashdb.service.auth.SecretsConfig;
 
 public class AuthCookieCrypterTest {
 
-  private static final String TEST_KEY = RandomStringUtils.randomAlphanumeric(32);
+  private static final String TEST_KEY = RandomStringUtils.randomAlphanumeric(SecretsConfig.KEY_LENGTH);
   private static final int USER_ID = 1;
   private static final long AUTHENTICTED_AT = 100L;
 

@@ -21,4 +21,23 @@
       </column>
     </createTable>
   </changeSet>
+  <changeSet id="add users columns" author="nrattner">
+    <addColumn tableName="users">
+      <column name="username" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+    <addColumn tableName="users">
+      <column name="password_salt" type="CHAR(10)">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+  </changeSet>
+  <changeSet id="create secrets table" author="nrattner">
+    <createTable tableName="secrets">
+      <column name="cookie_key" type="CHAR(32)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
 </databaseChangeLog>

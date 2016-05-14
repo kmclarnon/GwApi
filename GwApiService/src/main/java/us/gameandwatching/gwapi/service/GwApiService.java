@@ -10,27 +10,27 @@ import io.dropwizard.setup.Environment;
 import us.gameandwatching.gwapi.service.auth.AuthFilter;
 import us.gameandwatching.gwapi.service.auth.CaptureInjectorModule;
 
-public class SmashDBService extends Application<SmashDBConfiguration> {
+public class GwApiService extends Application<GwApiConfiguration> {
 
-  public static final String SERVICE_NAME = "SmashDB Service";
+  public static final String SERVICE_NAME = "GwApi Service";
   private CaptureInjectorModule captureInjectorModule = new CaptureInjectorModule();
 
   public static void main(String[] args) throws Exception {
-    new SmashDBService().run(args);
+    new GwApiService().run(args);
   }
 
   @Override
-  public void initialize(Bootstrap<SmashDBConfiguration> bootstrap) {
-    GuiceBundle<SmashDBConfiguration> guiceBundle = GuiceBundle.<SmashDBConfiguration>newBuilder()
+  public void initialize(Bootstrap<GwApiConfiguration> bootstrap) {
+    GuiceBundle<GwApiConfiguration> guiceBundle = GuiceBundle.<GwApiConfiguration>newBuilder()
         .addModule(captureInjectorModule)
-        .addModule(new SmashDBServiceModule())
+        .addModule(new GwApiServiceModule())
         .enableAutoConfig(getClass().getPackage().getName())
-        .setConfigClass(SmashDBConfiguration.class)
+        .setConfigClass(GwApiConfiguration.class)
         .build();
 
-    MigrationsBundle<SmashDBConfiguration> migrationsBundle = new MigrationsBundle<SmashDBConfiguration>() {
+    MigrationsBundle<GwApiConfiguration> migrationsBundle = new MigrationsBundle<GwApiConfiguration>() {
       @Override
-      public DataSourceFactory getDataSourceFactory(SmashDBConfiguration configuration) {
+      public DataSourceFactory getDataSourceFactory(GwApiConfiguration configuration) {
         return configuration.getDataSourceFactory();
       }
     };
@@ -45,7 +45,7 @@ public class SmashDBService extends Application<SmashDBConfiguration> {
   }
 
   @Override
-  public void run(SmashDBConfiguration configuration, Environment environment) throws Exception {
+  public void run(GwApiConfiguration configuration, Environment environment) throws Exception {
     environment.jersey().register(new AuthFilter(captureInjectorModule));
   }
 }

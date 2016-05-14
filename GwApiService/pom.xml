@@ -13,9 +13,9 @@
   <artifactId>GwApiService</artifactId>
 
   <properties>
-    <smash.dropwizard.version>0.8.4</smash.dropwizard.version>
-    <smash.dropwizard-guice.version>0.8.4.0</smash.dropwizard-guice.version>
-    <smash.rosetta.jdbi.version>3.10.7</smash.rosetta.jdbi.version>
+    <gwapi.dropwizard.version>0.8.4</gwapi.dropwizard.version>
+    <gwapi.dropwizard-guice.version>0.8.4.0</gwapi.dropwizard-guice.version>
+    <gwapi.rosetta.jdbi.version>3.10.7</gwapi.rosetta.jdbi.version>
   </properties>
 
   <dependencies>
@@ -27,32 +27,32 @@
     <dependency>
       <groupId>com.hubspot.dropwizard</groupId>
       <artifactId>dropwizard-guice</artifactId>
-      <version>${smash.dropwizard-guice.version}</version>
+      <version>${gwapi.dropwizard-guice.version}</version>
     </dependency>
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-core</artifactId>
-      <version>${smash.dropwizard.version}</version>
+      <version>${gwapi.dropwizard.version}</version>
     </dependency>
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-jdbi</artifactId>
-      <version>${smash.dropwizard.version}</version>
+      <version>${gwapi.dropwizard.version}</version>
     </dependency>
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-db</artifactId>
-      <version>${smash.dropwizard.version}</version>
+      <version>${gwapi.dropwizard.version}</version>
     </dependency>
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-migrations</artifactId>
-      <version>${smash.dropwizard.version}</version>
+      <version>${gwapi.dropwizard.version}</version>
     </dependency>
     <dependency>
       <groupId>com.hubspot.rosetta</groupId>
       <artifactId>RosettaJdbi</artifactId>
-      <version>${smash.rosetta.jdbi.version}</version>
+      <version>${gwapi.rosetta.jdbi.version}</version>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>

@@ -7,7 +7,7 @@ import com.hubspot.rosetta.databind.AutoDiscoveredModule;
 public class LowerCaseWithUnderscoresModule extends AutoDiscoveredModule {
 
   private static final String MODULE_NAME = "LowerCaseWithUnderscores";
-  private static final Version VERSION = new Version(1, 0, 0, "SNAPSHOT", "nk.smashdb", "SmashDBService");
+  private static final Version VERSION = new Version(1, 0, 0, "SNAPSHOT", "us.gameandwatching.gwapi", "GwApiService");
 
   @Override
   public String getModuleName() {

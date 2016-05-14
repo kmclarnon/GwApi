@@ -14,7 +14,7 @@ import us.gameandwatching.gwapi.service.daos.OptionalContainerFactory;
 import us.gameandwatching.gwapi.service.daos.SecretsDao;
 import us.gameandwatching.gwapi.service.daos.UsersDao;
 
-public class SmashDBServiceModule extends AbstractModule {
+public class GwApiServiceModule extends AbstractModule {
 
   @Override
   public void configure() {
@@ -23,7 +23,7 @@ public class SmashDBServiceModule extends AbstractModule {
   }
 
   @Provides
-  public DBI providesDbi(Environment environment, SmashDBConfiguration configuration) {
+  public DBI providesDbi(Environment environment, GwApiConfiguration configuration) {
     DBIFactory dbiFactory = new DBIFactory();
     DBI dbi = dbiFactory.build(environment, configuration.getDataSourceFactory(), "mysql");
     dbi.registerContainerFactory(new OptionalContainerFactory());

@@ -4,7 +4,7 @@ import org.immutables.value.Value;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SmashDBStyle
+@GwStyle
 @Value.Immutable
 public interface AuthCookieIF {
   @JsonProperty("u")

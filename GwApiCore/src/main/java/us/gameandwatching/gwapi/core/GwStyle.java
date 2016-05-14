@@ -20,4 +20,4 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
     buildOrThrow = "buildOrThrow", // ability to throw a specific exception on failure to build
     optionalAcceptNullable = true, // allow for an Optional<T> to have a setter that takes a null value of T
     visibility = Value.Style.ImplementationVisibility.SAME) // Generated class will have the same visibility as the abstract class/interface)
-public @interface SmashDBStyle {}
+public @interface GwStyle {}

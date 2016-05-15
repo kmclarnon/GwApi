@@ -40,4 +40,23 @@
       </column>
     </createTable>
   </changeSet>
+  <changeSet id="add matches table" author="kmclarnon">
+    <createTable tableName="matches">
+      <column name="id" autoIncrement="true" type="INT">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="player_1" type="INT">
+        <constraints nullable="false" foreignKeyName="fk_users_id" references="users(id)"/>
+      </column>
+      <column name="player_2" type="INT">
+        <constraints nullable="false" foreignKeyName="fk_users_id" references="users(id)"/>
+      </column>
+      <column name="result" type="INT">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  <changeSet id="update elo column" author="kmclarnon">
+    <modifyDataType tableName="users" columnName="elo" newDataType="DECIMAL(18,9)"/>
+  </changeSet>
 </databaseChangeLog>

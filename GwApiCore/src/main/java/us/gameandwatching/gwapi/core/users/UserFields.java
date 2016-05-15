@@ -5,6 +5,6 @@ public interface UserFields {
   String getUsername();
   String getPasswordHash();
   String getPasswordSalt();
-  int getElo();
+  double getElo();
   long getCreatedAt();
 }

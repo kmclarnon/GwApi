@@ -26,7 +26,6 @@ public class AuthCookieCrypterTest {
 
   @Before
   public void setup() {
-    System.out.println(TEST_KEY);
     secretsConfig = mock(SecretsConfig.class);
     when(secretsConfig.getCookieKey()).thenReturn(new SecretKeySpec(TEST_KEY.getBytes(StandardCharsets.UTF_8),
         SecretsConfig.COOKIE_CRYPT_ALGORITHM));
@@ -45,7 +44,5 @@ public class AuthCookieCrypterTest {
 
     assertEquals(originalAuthCookie.getUserId(), decryptedCookie.getUserId());
     assertEquals(originalAuthCookie.getAuthenticatedAt(), decryptedCookie.getAuthenticatedAt());
-
-    System.out.println(encryptedCookie);
   }
 }

@@ -34,7 +34,7 @@ public class EloCalculator {
     // this will result in non-zero sum matches
     if (rating < 2100) {
       return 32;
-    } else if(rating < 2400) {
+    } else if (rating < 2400) {
       return 24;
     } else {
       return 16;

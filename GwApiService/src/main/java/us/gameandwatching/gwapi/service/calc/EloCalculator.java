@@ -7,7 +7,7 @@ import us.gameandwatching.gwapi.core.MatchResult;
 
 @Singleton
 public class EloCalculator {
-  
+
   public EloPair updateEloRating(EloPair eloPair) {
     double player1startRating = eloPair.getPlayer1Rating();
     double player2StartRating = eloPair.getPlayer2Rating();
@@ -34,7 +34,7 @@ public class EloCalculator {
     // this will result in non-zero sum matches
     if (rating < 2100) {
       return 32;
-    } else if(rating > 2100 && rating < 2400) {
+    } else if(rating < 2400) {
       return 24;
     } else {
       return 16;

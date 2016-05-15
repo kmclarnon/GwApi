@@ -15,22 +15,22 @@ public class EloCalculator {
   }
 
   public EloPair updateEloRating(EloPair eloPair) {
-    double i1 = eloPair.getPlayer1Rating();
-    double i2 = eloPair.getPlayer2Rating();
+    double player1startRating = eloPair.getPlayer1Rating();
+    double player2StartRating = eloPair.getPlayer2Rating();
 
-    double r1 = computeTransformedRating(eloPair.getPlayer1Rating());
-    double r2 = computeTransformedRating(eloPair.getPlayer2Rating());
+    double player1TransformedRating = computeTransformedRating(eloPair.getPlayer1Rating());
+    double player2TransformedRating = computeTransformedRating(eloPair.getPlayer2Rating());
 
-    double e1 = computeExpectedRating(r1, r2);
-    double e2 = computeExpectedRating(r2, r1);
+    double player1ExpectedRating = computeExpectedRating(player1TransformedRating, player2TransformedRating);
+    double player2ExpectedRating = computeExpectedRating(player2TransformedRating, player1TransformedRating);
 
-    double s1 = getPlayer1Score(eloPair.getResult());
-    double s2 = getPlayer2Score(eloPair.getResult());
+    double player1Score = getPlayer1Score(eloPair.getResult());
+    double player2Score = getPlayer2Score(eloPair.getResult());
 
     return EloPair.builder()
         .setResult(eloPair.getResult())
-        .setPlayer1Rating(computeUpdatedRating(i1, getKFactor(i1), e1, s1))
-        .setPlayer2Rating(computeUpdatedRating(i2, getKFactor(i2), e2, s2))
+        .setPlayer1Rating(computeUpdatedRating(player1startRating, getKFactor(player1startRating), player1ExpectedRating, player1Score))
+        .setPlayer2Rating(computeUpdatedRating(player2StartRating, getKFactor(player2StartRating), player2ExpectedRating, player2Score))
         .build();
   }
 

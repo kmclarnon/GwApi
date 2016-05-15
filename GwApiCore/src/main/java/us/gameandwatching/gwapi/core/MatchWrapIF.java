@@ -19,8 +19,6 @@ public interface MatchWrapIF {
   default EloPair toEloPair() {
     return EloPair.builder()
         .setResult(getMatchResult())
-        .setPlayer1NumMatches(getPlayer1MatchesPlayed())
-        .setPlayer2NumMatches(getPlayer2MatchesPlayed())
         .setPlayer1Rating(getPlayer1().getElo())
         .setPlayer2Rating(getPlayer2().getElo())
         .build();

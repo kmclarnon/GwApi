@@ -22,7 +22,7 @@ public class EloCalculator {
     double r2 = computeTransformedRating(eloPair.getPlayer2Rating());
 
     double e1 = computeExpectedRating(r1, r2);
-    double e2 = computeExpectedRating(r1, r2);
+    double e2 = computeExpectedRating(r2, r1);
 
     double s1 = getPlayer1Score(eloPair.getResult());
     double s2 = getPlayer2Score(eloPair.getResult());
@@ -30,7 +30,7 @@ public class EloCalculator {
     return EloPair.builder()
         .setResult(eloPair.getResult())
         .setPlayer1Rating(computeUpdatedRating(i1, getKFactor(i1), e1, s1))
-        .setPlayer2Rating(computeUpdatedRating(i2, getKFactor(i1), e2, s2))
+        .setPlayer2Rating(computeUpdatedRating(i2, getKFactor(i2), e2, s2))
         .build();
   }
 

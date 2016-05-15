@@ -1,6 +1,5 @@
 package us.gameandwatching.gwapi.service.calc;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import us.gameandwatching.gwapi.core.EloPair;
@@ -8,12 +7,7 @@ import us.gameandwatching.gwapi.core.MatchResult;
 
 @Singleton
 public class EloCalculator {
-
-  @Inject
-  public EloCalculator() {
-
-  }
-
+  
   public EloPair updateEloRating(EloPair eloPair) {
     double player1startRating = eloPair.getPlayer1Rating();
     double player2StartRating = eloPair.getPlayer2Rating();

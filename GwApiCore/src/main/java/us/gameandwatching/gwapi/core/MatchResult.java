@@ -16,12 +16,12 @@ public enum MatchResult {
 
   private final int id;
   private final boolean player1Won;
-  private final boolean user2won;
+  private final boolean player2Won;
 
-  MatchResult(int id, boolean user1won, boolean user2won) {
+  MatchResult(int id, boolean player1Won, boolean player2Won) {
     this.id = id;
-    this.player1Won = user1won;
-    this.user2won = user2won;
+    this.player1Won = player1Won;
+    this.player2Won = player2Won;
   }
 
   public boolean getPlayer1Won() {
@@ -29,7 +29,7 @@ public enum MatchResult {
   }
 
   public boolean getPlayer2Won() {
-    return user2won;
+    return player2Won;
   }
 
   @RosettaValue
